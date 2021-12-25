@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>TODO App</h1>
+        </header>
+
+        <main>
+            <section class="top-section">
+                <form action="/save-todo" method="post">
+                    <div class="desc">
+                        <span class="text-uppercase">Description</span><br />
+                        <input type="text" name="description" autocomplete="off" placeholder="What do you need to do?"
+                            required />
+                    </div>
+
+                    <div class="box">
+                        <div class="category">
+                            <span class="text-uppercase">Category</span>
+                            <select name="category">
+                                <option value="Personal">Personal</option>
+                                <option value="Work">Work</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                        <div class="date">
+                            <span class="text-uppercase">Due date</span> <br />
+                            <input type="date" name="date" id="date" required />
+                        </div>
+                    </div>
+
+
+                    <button class="btn add-btn">
+                        <i class="fa fa-plus"></i>
+                        <span class="text-uppercase">Add task</span>
+                    </button>
+
+                </form>
+            </section>
+
+
+
+            <section class="bottom-section">
+                <% for(var i=0; i< todos.length; i++) {%>
+
+                    <div class="todo">
+
+                        <div>
+                            <span>
+                                <%= todos[i].description %>
+                            </span>
+
+                            <form action="/delete-todo" method="post">
+                                <input style="visibility: hidden;" type="text" name="description"
+                                    value="<%= todos[i].description %>">
+                                <button class="btn delete-btn">
+                                    <i class="fa fa-trash-o" style="font-size: 20px"></i>
+                                </button>
+                            </form>
+
+                            <div>
+                                <span class="selected-date">
+                                    <i class="fa fa-calendar"></i>
+                                    <%= todos[i].date %>
+                                </span>
+
+
+                                <% if(todos[i].category=="Work" ){ %>
+
+                                    <span class="selected-category category-work-color">
+                                        <%= todos[i].category %>
+                                    </span>
+
+                                    <% } else if(todos[i].category=="Personal" ) { %>
+
+                                        <span class="selected-category category-personal-color">
+                                            <%= todos[i].category %>
+                                        </span>
+
+                                        <% } else{ %>
+
+                                            <span class="selected-category category-others-color">
+                                                <%= todos[i].category %>
+                                            </span>
+
+                                            <% } %>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <% } %>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
