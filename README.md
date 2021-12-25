@@ -7,7 +7,7 @@ A simple todo app build using <b>express</b> and <b>ejs</b>
 
 
 # Setup
-* Make sure you have nodejs installed
+ Make sure you have nodejs and mongodb installed
 - Step 1:
 ```
 $ git clone https://github.com/thapasunita/todo-app.git

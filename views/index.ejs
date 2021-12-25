@@ -62,8 +62,8 @@
                             </span>
 
                             <form action="/delete-todo" method="post">
-                                <input style="visibility: hidden;" type="text" name="description"
-                                    value="<%= todos[i].description %>">
+                                <input style="visibility: hidden;" type="text" name="_id"
+                                    value="<%= todos[i]._id %>">
                                 <button class="btn delete-btn">
                                     <i class="fa fa-trash-o" style="font-size: 20px"></i>
                                 </button>
@@ -72,7 +72,7 @@
                             <div>
                                 <span class="selected-date">
                                     <i class="fa fa-calendar"></i>
-                                    <%= todos[i].date %>
+                                    <%=  new Date(todos[i].date).toLocaleDateString();  %>
                                 </span>
 
 

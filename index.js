@@ -1,5 +1,6 @@
 const express = require('express');
 const server = express();
+const db = require('./config/mongoose');
 
 server.use(express.static('assets'));
 server.use(express.urlencoded({ extended: true }));
@@ -7,31 +8,51 @@ server.use(express.urlencoded({ extended: true }));
 server.set("view engine", "ejs");
 server.set("views", "./views");
 
-const data = [];
+
 
 server.get('/', function (request, response) {
-   return response.render("index", { todos: data });
+
+   db.Todo.find({},function(err, datas){
+      if(err){
+         console.log(`Error: ${err}`);
+         return;
+      }
+      return response.render("index", { todos: datas });
+   })
+
+
+  
+
+
 });
 
 
 server.post('/save-todo', function (request, response) {
+   console.log(request.body);
 
-   data.push(request.body);
-   return response.redirect('/');
+   db.Todo.create(request.body, function (err, obj) {
+      if (err) {
+         console.log(`Error: ${err}`);
+         return;
+      }
+      console.log(`Data saved: ${obj}`);
+      return response.redirect('/');
+   });
+
 
 });
 
 server.post('/delete-todo', function (request, response) {
-   let deleteIndex;
-   for (let i = 0; i < data.length; i++) {
-      if (data[i].description == request.body.description) {
-         deleteIndex = i;
-         break;
-      }
-
-   }
-   data.splice(deleteIndex, 1);
-   return response.redirect('/');
+  
+   console.log(request.body);
+  db.Todo.deleteOne(request.body, function(err){
+     if(err){
+        console.log(`Error: ${err}`);
+        return;
+     }
+     return response.redirect('/');
+  } );
+   
 });
 
 
