@@ -6,7 +6,7 @@ A simple todo app build using <b>express</b> and <b>ejs</b>
 <img src='https://raw.githubusercontent.com/thapasunita/todo-app/master/assets/todo-app.gif'>
 
 
-Setup
+# Setup
 - Step 1:
 ```
 $ git clone https://github.com/thapasunita/todo-app.git
